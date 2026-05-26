@@ -1,9 +1,9 @@
-const nodemailer = require('nodemailer')
+import { createTransport } from 'nodemailer'
 
 let _transporter = null
 function getTransporter() {
   if (_transporter) return _transporter
-  _transporter = nodemailer.createTransport({
+  _transporter = createTransport({
     service: 'gmail',
     auth: {
       user: process.env.GMAIL_USER,
@@ -112,7 +112,7 @@ body{background:#eef2f8;font-family:'Helvetica Neue',Arial,sans-serif}
 }
 
 // ─── Main handler ─────────────────────────────────────────────
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // CORS — allow your Vercel domain and local dev
   const allowed = [
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '',
